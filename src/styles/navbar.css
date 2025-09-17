@@ -1,0 +1,15 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    height: 60px;
+    top: 30px;
+    left: 20px;
+    right: 20px;
+    background-color: darkblue;
+}
+
+.logo{
+    height: 100px;
+}

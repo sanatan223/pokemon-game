@@ -1,14 +1,14 @@
 
 import './App.css'
-import './poke-card.css'
-import Pokecard from './views/Pokecard'
+import Navbar from './views/Navbar'
+import PokeContainer from './views/PokeContainer'
 
 function App() {
-
   return (
     <>
-      {}
-      <Pokecard />
+      <Navbar />
+      <h1>Choose your Pokemon:</h1>
+      <PokeContainer />
     </>
   )
 }
