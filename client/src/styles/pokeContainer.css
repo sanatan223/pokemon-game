@@ -1,0 +1,29 @@
+.container-body{
+    margin-top: 70px;
+}
+
+.poke-container{
+    display: grid;
+    grid-template-columns: 300px 300px 300px 300px;
+    column-gap: 50px;
+}
+
+@media (max-width: 1300px) {
+    .poke-container{
+        grid-template-columns: 300px 300px 300px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .poke-container{
+        grid-template-columns: 300px 300px;
+        column-gap: 30px;
+    }
+}
+
+@media (max-width: 650px) {
+    .poke-container{
+        grid-template-columns: 300px;
+        column-gap: 0px;
+    }
+}

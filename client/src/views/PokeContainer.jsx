@@ -6,6 +6,8 @@ function PokeContainer() {
 
   return (
     <>
+      <div className="container-body">
+        <h1>Choose your Pokemon:</h1>
         <div className='poke-container'>
             {pokemons.map(pokemon => (
                 <Pokecard
@@ -13,8 +15,9 @@ function PokeContainer() {
                 type={pokemon.type}
                 gender={pokemon.gender}
                 catch={pokemon.catch} />
-            ))};
+            ))}
         </div>
+      </div>
     </>
   )
 }

@@ -7,7 +7,6 @@ function App() {
   return (
     <>
       <Navbar />
-      <h1>Choose your Pokemon:</h1>
       <PokeContainer />
     </>
   )

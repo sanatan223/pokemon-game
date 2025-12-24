@@ -24,6 +24,6 @@ const pokemons = [{
     catch: 23
 }];
 
-console.log('database success')
+
 
 export default pokemons
