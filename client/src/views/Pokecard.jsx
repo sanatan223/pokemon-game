@@ -4,7 +4,7 @@ function Pokecard(props){
     return (
         <>
             <div className='pokemon-card'>
-                <img className='pokemon-img' src="https://s3.pokeos.com/pokeos-uploads/assets/pokemon/home/render/376.png" alt="pokemon image" />
+                <img className='pokemon-img' src={`https://s3.pokeos.com/pokeos-uploads/assets/pokemon/home/render/${props.id}.png`} alt="pokemon image" />
                 <div className="pokemon-data">
                     <div>
                         <p>Name: {props.name}</p>

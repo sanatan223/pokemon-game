@@ -1,7 +1,7 @@
 
-import './App.css'
-import Navbar from './views/Navbar'
-import PokeContainer from './views/PokeContainer'
+import '../styles/App.css'
+import Navbar from './Navbar'
+import PokeContainer from './PokeContainer'
 
 function App() {
   return (

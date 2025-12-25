@@ -1,0 +1,7 @@
+body{
+    padding-top: 60px;
+}
+
+.pokemon-search-item{
+    cursor: pointer;
+}

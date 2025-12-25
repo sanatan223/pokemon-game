@@ -11,6 +11,8 @@ function PokeContainer() {
         <div className='poke-container'>
             {pokemons.map(pokemon => (
                 <Pokecard
+                key={pokemon.id}
+                id={pokemon.id}
                 name={pokemon.name}
                 type={pokemon.type}
                 gender={pokemon.gender}
