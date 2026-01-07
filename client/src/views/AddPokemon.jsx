@@ -5,12 +5,13 @@ import pokemons from '../../database/pokemons';
 import Pokecard from './Pokecard';
 
 const AddPokemon = () => {
-  const [query, setQuery] = useState(" ");
+  const [query, setQuery] = useState("");
   const [pokemon, setPokemon] = useState(null);
+  const [focused, setFocused] = useState(false);
 
   return (
     <>
-      <Navbar />
+      <Navbar destination={'/'} display={'Home'} />
       {!pokemon && (
         <div>
           <h2>Search Pokemon</h2>
@@ -20,22 +21,27 @@ const AddPokemon = () => {
             name="name"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => {setFocused(true)}}
+            onBlur={() => {setFocused(false)}}
           />
 
-          {pokemons.map((p) => {
-            if (p.name.toLowerCase().includes(query.toLowerCase())) {
-              return (
-                <div
-                  key={p.id}
-                  className="pokemon-search-item"
-                  onClick={() => setPokemon(p)}
-                >
-                  <p>{p.name}</p>
-                </div>
-              );
-            }
-            return null;
-          })}
+          {focused && 
+            (pokemons.map((p) => {
+              if (p.name.toLowerCase().includes(query.toLowerCase())) {
+                return (
+                  <div
+                    key={p.id}
+                    className="pokemon-search-item"
+                    onClick={() => setPokemon(p)}
+                  >
+                    <p>{p.name}</p>
+                  </div>
+                );
+              }
+              return null;
+            }))
+          }
+
         </div>
       )}
 

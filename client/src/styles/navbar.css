@@ -13,3 +13,28 @@
 .logo{
     height: 100px;
 }
+
+.button-container{
+    display: flex;
+    align-items: center;
+    gap: 0px;
+}
+
+.pokeball{
+    height: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+button{
+    background-color: lightblue;
+    border: none;
+    padding: 10px 0px;
+    cursor: pointer;
+    transition: padding 0.5s ease-in-out;
+}
+
+button:hover{
+    background-color: deepskyblue;
+    padding: 11px 30px;
+}

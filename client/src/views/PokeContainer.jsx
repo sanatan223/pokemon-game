@@ -9,15 +9,15 @@ function PokeContainer() {
       <div className="container-body">
         <h1>Choose your Pokemon:</h1>
         <div className='poke-container'>
-            {pokemons.map(pokemon => (
-                <Pokecard
-                key={pokemon.id}
-                id={pokemon.id}
-                name={pokemon.name}
-                type={pokemon.type}
-                gender={pokemon.gender}
-                catch={pokemon.catch} />
-            ))}
+          {pokemons.map(pokemon => (
+              <Pokecard
+              key={pokemon.id}
+              id={pokemon.id}
+              name={pokemon.name}
+              type={pokemon.type}
+              gender={pokemon.gender}
+              catch={pokemon.catch} />
+          ))}
         </div>
       </div>
     </>

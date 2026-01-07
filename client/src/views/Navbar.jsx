@@ -1,14 +1,24 @@
 import '../styles/navbar.css'
-import React from 'react';
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import pokeballLeftUrl from '../assets/pokeball-left.svg'
+import pokeballRightUrl from '../assets/pokeball-right.svg'
 
-function Navbar(){
+function Navbar(props){
     const navigate = useNavigate();
+
     return (
         <>
             <div className="navbar">
-                <div><img className='logo' src="logo.png" alt="Pokemon container" /></div>
-                <Link to="addPokemon">Add Pokemon</Link>
+                <img className='logo' src="logo.png" alt="Pokemon container" />
+                <div className='button-container' >
+                    <img className='pokeball' src={pokeballLeftUrl} alt="pokeball" />
+                    <button
+                        onClick={() => navigate(props.destination)}
+                    >
+                        {props.display}
+                    </button>
+                    <img className='pokeball' src={pokeballRightUrl} alt="pokeball" />
+                </div>
             </div>
         </>
     )
