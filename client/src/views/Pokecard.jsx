@@ -8,11 +8,11 @@ function Pokecard(props){
                 <div className="pokemon-data">
                     <div>
                         <p>Name: {props.name}</p>
-                        <p>Type: {props.type}</p>
+                        <p>Type: {props.type.map((type) => type.type.name + " ")}</p>
                     </div>
                     <div>
-                        <p>Gender: {props.gender}</p>
-                        <p>Catch: {props.catch}%</p>
+                        <p>Experience: {props.exp}</p>
+                        <p>Weight: {props.weight}Kg</p>
                     </div>
                 </div>
             </div>
