@@ -38,7 +38,7 @@ const AddPokemon = () => {
 
   return (
     <>
-      <Navbar destination={'/'} display={'Home'} />
+      <Navbar isHome={false} />
       {!pokemon && (
         <div>
           <h2>Search Pokemon</h2>

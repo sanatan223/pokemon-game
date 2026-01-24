@@ -6,7 +6,7 @@ import PokeContainer from './PokeContainer'
 function App() {
   return (
     <>
-      <Navbar destination={'/addPokemon'} display={'Add Pokemon'} />
+      <Navbar isHome={true} />
       <PokeContainer />
     </>
   )
