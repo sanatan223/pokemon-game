@@ -5,6 +5,19 @@
   text-align: center;
 }
 
+.background{
+  background-image: url(/background.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -100;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

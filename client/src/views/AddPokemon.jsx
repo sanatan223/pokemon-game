@@ -22,7 +22,7 @@ const AddPokemon = () => {
   async function addCurrentPokemon(pokemon) {
     const response = await fetch(pokemon.url)
     const data = await response.json()
-    setPokemon(data)
+    setPokemon(data);
     setFocused(false);
   }
 
@@ -34,10 +34,14 @@ const AddPokemon = () => {
       types: pokemon.types,
       weight: pokemon.weight,
     })
+    console.log('pokemon added to storage:')
   }
 
   return (
     <>
+      <div 
+        className="capture-background"
+        ></div>
       <Navbar isHome={false} />
       {!pokemon && (
         <div>

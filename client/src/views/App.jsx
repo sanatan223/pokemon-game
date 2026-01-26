@@ -6,8 +6,9 @@ import PokeContainer from './PokeContainer'
 function App() {
   return (
     <>
-      <Navbar isHome={true} />
-      <PokeContainer />
+      <div className='background'></div>
+        <Navbar isHome={true} />
+        <PokeContainer />
     </>
   )
 }
