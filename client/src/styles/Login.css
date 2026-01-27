@@ -1,0 +1,109 @@
+.login-background {
+    background-image: url('all-pokemon.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.login-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #00d4ff;
+    border-radius: 15px;
+    padding: 40px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    font-family: sans-serif;
+}
+
+.logo-placeholder {
+    width: 70%;
+    padding: 20px;
+}
+
+.logo-img {
+    width: 100%;
+    height: auto;
+}
+
+.login-header {
+    color: #4a5565;
+    padding: 0px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.input-group input {
+    width: 90%;
+    height: 12hv;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(128, 128, 128, 0.5);
+    border-radius: 5px;
+    outline: none;
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #ff0000, #cc0000);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-transform: uppercase;
+}
+
+.login-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+
+.register-btn{
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, green, cyan, blue);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-transform: uppercase;
+    margin: 20px;
+}

@@ -1,14 +1,20 @@
 
+import { useNavigate } from 'react-router-dom'
 import '../styles/App.css'
 import Navbar from './Navbar'
 import PokeContainer from './PokeContainer'
 
 function App() {
+  const navigate = useNavigate();
   return (
     <>
       <div className='background'></div>
-        <Navbar isHome={true} />
-        <PokeContainer />
+      <div
+        className='login-redirect-btn'
+        onClick={() => navigate('/login')}
+        >Login</div>
+      <Navbar isHome={true} />
+      <PokeContainer />
     </>
   )
 }

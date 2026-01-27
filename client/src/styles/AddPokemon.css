@@ -2,6 +2,19 @@ body{
     padding-top: 60px;
 }
 
+.capture-background{
+  background-image: url(../../public/capture-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -100;
+}
+
 .pokemon-search-item{
     cursor: pointer;
 }
