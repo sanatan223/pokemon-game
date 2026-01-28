@@ -43,58 +43,75 @@ const AddPokemon = () => {
         className="capture-background"
         ></div>
       <Navbar isHome={false} />
-      {!pokemon && (
-        <div>
-          <h2>Search Pokemon</h2>
-          <input
-            type="text" 
-            id="name" 
-            name="name"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => {setFocused(true)}}
-          />
+      <div 
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
 
-          {focused && 
-            (allPokemons.map((p, i) => {
-              if (p.name.toLowerCase().includes(query.toLowerCase())) {
-                return (
-                  <div
-                    key={i}
-                    className="pokemon-search-item"
-                    onClick={() => addCurrentPokemon(p)}
-                  >
-                    <p>{p.name}</p>
-                  </div>
-                );
+          {!pokemon && (
+            <>
+              <div className='search-header'>Search Pokemon</div>
+              <input
+                className='pokemon-search'
+                placeholder='Search Pokemon by name'
+                autoComplete='off'
+                type="text" 
+                id="name" 
+                name="name"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => {setFocused(true)}}
+              />
+
+              {focused && 
+                <div className="pokemons-container">
+                  {(allPokemons.map((p, i) => {
+                    if (p.name.toLowerCase().includes(query.toLowerCase())) {
+                      return (
+                        <div
+                          key={i}
+                          className="pokemon-search-item"
+                          onClick={() => addCurrentPokemon(p)}
+                        >
+                          <p>{p.name}</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }))}
+                </div>
               }
-              return null;
-            }))
-          }
+            </>
+          )}
+
+          {pokemon && (
+            <div>
+              <Pokecard
+                  key={pokemon.id}
+                  id={pokemon.id}
+                  name={pokemon.name}
+                  exp={pokemon.base_experience}
+                  type={pokemon.types}
+                  weight={pokemon.weight} />
+              <form className="add-pokemon-form">
+                <button 
+                className='pokemon-search-item'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addPokemon(pokemon);
+                    setPokemon(null);
+                    setQuery("");
+                  }}type="submit">Capture Pokemon</button>
+              </form>
+            </div>
+          )}
 
         </div>
-      )}
 
-      {pokemon && (
-        <div>
-          <Pokecard
-              key={pokemon.id}
-              id={pokemon.id}
-              name={pokemon.name}
-              exp={pokemon.base_experience}
-              type={pokemon.types}
-              weight={pokemon.weight} />
-          <form className="add-pokemon-form">
-            <button 
-              onClick={(e) => {
-                e.preventDefault();
-                addPokemon(pokemon);
-                setPokemon(null);
-                setQuery("");
-              }}type="submit">Add Pokemon</button>
-          </form>
-        </div>
-      )}
 
     </>
   );

@@ -23,7 +23,7 @@ const habitatMap = {
 };
 
 function Pokecard(props){
-    const [habitat, setHabitat] = useState(null);
+    const [habitat, setHabitat] = useState('grassland');
     
     useEffect(() => {
         const getHabitat = async() => {
@@ -39,7 +39,7 @@ function Pokecard(props){
     return (
         <>
             <div className='pokemon-card'>
-                <div>
+                <div className='pokemon-img-holder'>
                     <img
                         className='pokemon-img'
                         src={`https://s3.pokeos.com/pokeos-uploads/assets/pokemon/home/render/${props.id}.png`}
