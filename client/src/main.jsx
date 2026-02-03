@@ -2,8 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "./views/App";
-import AddPokemon from "./views/AddPokemon";
-import LoginPage from "./views/Login";
+import AddPokemon from "./views/pages/AddPokemon";
+import LoginPage from "./views/pages/Login";
+import AuthPage from "./views/pages/AuthPage";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ const router = createBrowserRouter([
   },
   {
     path: "login",
-    element: <LoginPage />,
+    element: <AuthPage site={'login'} />,
+  },
+  {
+    path: "signup",
+    element: <AuthPage site={'signup'} />,
   },
 ]);
 

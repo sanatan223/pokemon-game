@@ -1,6 +1,6 @@
 import Pokecard from './Pokecard'
-import '../styles/pokeContainer.css'
-import inventoryPokemons from '../../database/pokemons'
+import '../../styles/pokeContainer.css'
+import inventoryPokemons from '../../../database/pokemons'
 import { useEffect, useState } from 'react'
 
 function PokeContainer() {

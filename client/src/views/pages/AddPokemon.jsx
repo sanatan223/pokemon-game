@@ -1,8 +1,8 @@
-import '../styles/AddPokemon.css';
-import Navbar from "./Navbar";
+import '../../styles/AddPokemon.css';
+import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
-import Pokecard from './Pokecard';
-import inventoryPokemons from '../../database/pokemons';
+import Pokecard from '../components/Pokecard';
+import inventoryPokemons from '../../../database/pokemons';
 
 const AddPokemon = () => {
   const [query, setQuery] = useState("");

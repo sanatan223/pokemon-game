@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import '../styles/poke-card.css'
-import cave from '../assets/backgrounds/cave-background.webp';
-import forest from '../assets/backgrounds/forest-background.webp'
-import grassland from '../assets/backgrounds/grassland-background.webp'
-import mountain from '../assets/backgrounds/mountain-background.webp'
-import rare from '../assets/backgrounds/rare-background.webp'
-import roungTerrain from '../assets/backgrounds/rough-terrain-background.webp'
-import sea from '../assets/backgrounds/sea-background.webp'
-import urban from '../assets/backgrounds/urban-background.webp'
-import watersEdge from '../assets/backgrounds/waters-edge-background.webp'
+import '../../styles/poke-card.css'
+import cave from '../../assets/backgrounds/cave-background.webp';
+import forest from '../../assets/backgrounds/forest-background.webp'
+import grassland from '../../assets/backgrounds/grassland-background.webp'
+import mountain from '../../assets/backgrounds/mountain-background.webp'
+import rare from '../../assets/backgrounds/rare-background.webp'
+import roungTerrain from '../../assets/backgrounds/rough-terrain-background.webp'
+import sea from '../../assets/backgrounds/sea-background.webp'
+import urban from '../../assets/backgrounds/urban-background.webp'
+import watersEdge from '../../assets/backgrounds/waters-edge-background.webp'
 
 const habitatMap = {
     cave: cave,
