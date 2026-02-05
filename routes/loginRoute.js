@@ -4,6 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const express = require('express');
 const loginRouter = express.Router();
 const pool = require('../database/pool');
+const bcrypt = require('bcryptjs');
 
 loginRouter.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 loginRouter.use(passport.session());
@@ -18,7 +19,9 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      if (user.password !== password) {
+
+      if (!bcrypt.compare(user.password, password)) {
+        console.log("here")
         return done(null, false, { message: "Incorrect password" });
       }
       return done(null, user);

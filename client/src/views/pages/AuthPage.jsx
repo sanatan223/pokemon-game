@@ -20,7 +20,7 @@ const AuthPage = (props) => {
     console.log(password)
   }
 
-  const validateSignup = async (username, password) => {
+  const validateCred = async (username, password) => {
     const error = {};
 
     const userRegex = /^[a-zA-Z0-9_-]{3,20}$/;
@@ -37,27 +37,52 @@ const AuthPage = (props) => {
     return error;
   };
 
-  const handleSubmit = async (username, password) => {
-    const error = await validateSignup(username, password);
+  const handleLogin = async (username, password) => {
+    const error = await validateCred(username, password);
     if (Object.keys(error).length > 0){
       console.log("Validation errors:", error);
       return;
     }
-    const loginData = { username: username, password: password };
-    console.log("data submited", loginData)
+    const data = { username: username, password: password };
+    console.log("data submited", data)
 
-    const response = await fetch(props.site === 'signup'? "api/signup" : "api/login", {
+    const response = await fetch("api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(loginData),
+      body: JSON.stringify(data),
+    });
+    console.log("user data sent for login.")
+    console.log(response);
+    if (response.ok) {
+      console.log("user logged in", response.statusText);
+      navigate('/');
+    } else {
+      console.error('Failed to log user');
+    }
+  };
+
+  const handleSubmit = async (username, password) => {
+    const error = await validateCred(username, password);
+    if (Object.keys(error).length > 0){
+      console.log("Validation errors:", error);
+      return;
+    }
+    const data = { username: username, password: password };
+    console.log("data submited", loginData)
+
+    const response = await fetch("api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
     console.log("user data sent for creatioin.")
     console.log(response);
     if (response.ok) {
-      const data = await response.json();
-      console.log("user created", data);
+      console.log("user created", response.statusText);
       navigate('/');
     } else {
       console.error('Failed to create user');
@@ -83,8 +108,8 @@ const AuthPage = (props) => {
           <label>Password</label>
           <input type="text" onChange={handlePasswordChange} placeholder="Pikachu@123" />
         </div>
-        <button className="login-btn" onClick={() => { handleSubmit(username, password) }} >
-          Create Account
+        <button className="login-btn" onClick={() => {props.site == 'signup'? handleSubmit(username, password) : handleLogin(username, password)}} >
+          {props.site === 'signup' ? "Create Account" : "Login"}
         </button>
         <button className='register-btn' onClick={() => { navigate(props.site === 'signup'? '/login' : '/signup') }}>
           {props.site === 'signup'? "Login to existing Account" : "Start new container"}
