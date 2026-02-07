@@ -30,7 +30,6 @@ signupRouter.post('/', [
         return res.status(401).send("user already exists");
     }
     await insertUser(username, password);
-    console.log("user added")
     res.status(200).send("user created");
 })
 

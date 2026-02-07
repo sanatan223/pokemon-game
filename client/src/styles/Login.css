@@ -1,5 +1,5 @@
 .login-background {
-    background-image: url('../../public/all-pokemon.webp');
+    background-image: url('/all-pokemon.webp');
     background-size: cover;
     background-position: center;
     display: flex;

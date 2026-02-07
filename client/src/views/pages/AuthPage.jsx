@@ -12,12 +12,10 @@ const AuthPage = (props) => {
     const value = e.target.value
     e.target.value = value.toLowerCase();
     setUsername(value.toLowerCase());
-    console.log(username)
   }
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    console.log(password)
   }
 
   const validateCred = async (username, password) => {
@@ -44,7 +42,6 @@ const AuthPage = (props) => {
       return;
     }
     const data = { username: username, password: password };
-    console.log("data submited", data)
 
     const response = await fetch("api/login", {
       method: "POST",
@@ -53,7 +50,7 @@ const AuthPage = (props) => {
       },
       body: JSON.stringify(data),
     });
-    console.log("user data sent for login.")
+    
     console.log(response);
     if (response.ok) {
       console.log("user logged in", response.statusText);
@@ -70,7 +67,6 @@ const AuthPage = (props) => {
       return;
     }
     const data = { username: username, password: password };
-    console.log("data submited", loginData)
 
     const response = await fetch("api/signup", {
       method: "POST",
@@ -79,7 +75,6 @@ const AuthPage = (props) => {
       },
       body: JSON.stringify(data),
     });
-    console.log("user data sent for creatioin.")
     console.log(response);
     if (response.ok) {
       console.log("user created", response.statusText);

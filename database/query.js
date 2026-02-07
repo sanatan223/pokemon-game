@@ -12,8 +12,14 @@ async function getUserByName(name){
 }
 
 async function insertUser(name, pass){
-    const user = await pool.query("INSERT INTO users(username, password) VALUES($1, $2);", [name, bcrypt.hashSync(pass, 10)])
-    console.log("User inserted");
+    await pool.query("INSERT INTO users(username, password) VALUES($1, $2);", [name, await bcrypt.hash(pass, 10)])
 }
 
-module.exports = { getAllUsers, getUserByName, insertUser }
+async function comparePassword(name, pass){
+    const { rows } = await pool.query("SELECT * FROM users WHERE username = $1;", [name]);
+    const user = await rows[0];
+    const result = await bcrypt.compare(pass, user.password);
+    return result;
+}
+
+module.exports = { getAllUsers, getUserByName, insertUser, comparePassword }

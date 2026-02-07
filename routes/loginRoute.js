@@ -5,6 +5,7 @@ const express = require('express');
 const loginRouter = express.Router();
 const pool = require('../database/pool');
 const bcrypt = require('bcryptjs');
+const { getUserByName, insertUser, comparePassword } = require('../database/query');
 
 loginRouter.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 loginRouter.use(passport.session());
@@ -13,17 +14,18 @@ loginRouter.use(express.urlencoded({ extended: false }));
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
+      const { rows } = await getUserByName(username);
       const user = rows[0];
 
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
 
-      if (!bcrypt.compare(user.password, password)) {
-        console.log("here")
-        return done(null, false, { message: "Incorrect password" });
+      const isPassword = await comparePassword(username, password);
+      if (!isPassword) {
+        return done(null, false, { message: "Incorrect password by match" })
       }
+      
       return done(null, user);
     } catch(err) {
       return done(err);
