@@ -34,7 +34,6 @@ const AddPokemon = () => {
       types: pokemon.types,
       weight: pokemon.weight,
     })
-    console.log('pokemon added to storage:')
   }
 
   return (

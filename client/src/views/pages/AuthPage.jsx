@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import '../../styles/Login.css';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/UserContext';
 
 const AuthPage = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const handleNameChange = (e) => {
     const value = e.target.value
@@ -54,6 +56,7 @@ const AuthPage = (props) => {
     console.log(response);
     if (response.ok) {
       console.log("user logged in", response.statusText);
+      setUser(username);
       navigate('/');
     } else {
       console.error('Failed to log user');
@@ -78,7 +81,7 @@ const AuthPage = (props) => {
     console.log(response);
     if (response.ok) {
       console.log("user created", response.statusText);
-      navigate('/');
+      handleLogin(username, password);
     } else {
       console.error('Failed to create user');
     }

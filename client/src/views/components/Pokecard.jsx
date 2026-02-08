@@ -34,8 +34,6 @@ function Pokecard(props){
         getHabitat();
     }, [props.name]);
 
-    console.log(habitat)
-
     return (
         <>
             <div className='pokemon-card'>

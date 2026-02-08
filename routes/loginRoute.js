@@ -7,8 +7,6 @@ const pool = require('../database/pool');
 const bcrypt = require('bcryptjs');
 const { getUserByName, insertUser, comparePassword } = require('../database/query');
 
-loginRouter.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
-loginRouter.use(passport.session());
 loginRouter.use(express.urlencoded({ extended: false }));
 
 passport.use(

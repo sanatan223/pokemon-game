@@ -14,8 +14,6 @@ signupRouter.post('/', [
     body('password')
     .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
     .matches(/\d/).withMessage('Password must contain a number')
-    .not().toLowerCase().withMessage('Password should not be all lowercase (optional)'),
-
 ], async (req, res) => {
 
     const errors = validationResult(req);

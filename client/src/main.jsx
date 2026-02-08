@@ -5,6 +5,7 @@ import App from "./views/App";
 import AddPokemon from "./views/pages/AddPokemon";
 import LoginPage from "./views/pages/Login";
 import AuthPage from "./views/pages/AuthPage";
+import { AuthProvider } from "./context/UserContext";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+
+    </AuthProvider>
   </StrictMode>
 );
