@@ -1,8 +1,10 @@
 import '../../styles/navbar.css'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/UserContext';
 
 function Navbar(props) {
     const navigate = useNavigate();
+    const { user, logout} = useAuth();
 
     return (
         <>
@@ -17,8 +19,18 @@ function Navbar(props) {
                         <div className="gradient-text">Home</div>
                     </div>
                 </div>
-                <div className='logo-container-border'>
-                    <div className="logo-container"><img className='logo' src="logo.png" alt="Pokemon container" /></div>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
+                    <div className='logo-container-border'>
+                        <div className="logo-container"><img className='logo' src="logo.png" alt="Pokemon container" /></div>
+                    </div>
+                    <div
+                    className='login-redirect-btn'
+                    onClick={() => user? logout() : navigate('/login')}
+                    >{user? 'Logout': 'Login'}</div>
                 </div>
                 <div
                     className="capture-shadow"
