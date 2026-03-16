@@ -1,18 +1,26 @@
 import '../../styles/navbar.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context/UserContext';
+import Popup from './Popup';
 
-function Navbar(props) {
+function Navbar() {
     const navigate = useNavigate();
     const { user, logout} = useAuth();
+    const location = useLocation();
 
     return (
         <>
+            {user && (
+                <Popup
+                message={`${user.username} has logged in!`}
+                duration={3000}
+                />
+            )}
             <div className="navbar">
                 <div
                     className="home-shadow"
                     style={{
-                        borderColor: !props.isHome ? 'transparent' : 'purple'
+                        borderBottom: location.pathname === '/' ? '5px solid purple' : 'none',
                     }}
                     >
                     <div onClick={() => navigate('/')} className='home-button'>
@@ -29,13 +37,16 @@ function Navbar(props) {
                     </div>
                     <div
                     className='login-redirect-btn'
+                    style={{
+                        display: location.pathname === '/login' || location.pathname === '/signup' ?'none' : 'block',
+                    }}
                     onClick={() => user? logout() : navigate('/login')}
                     >{user? 'Logout': 'Login'}</div>
                 </div>
                 <div
                     className="capture-shadow"
                     style={{
-                        borderBottom: props.isHome ? 'none' : '5px solid purple',
+                        borderBottom: location.pathname === '/addpokemon' ? '5px solid purple' : 'none',
                     }}
                     >
                     <div onClick={() => navigate('/addpokemon')} className='capture-button' >

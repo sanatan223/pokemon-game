@@ -1,14 +1,15 @@
 import '../../styles/AddPokemon.css';
-import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import Pokecard from '../components/Pokecard';
 import inventoryPokemons from '../../../database/pokemons';
+import { useAuth } from '../../context/UserContext';
 
 const AddPokemon = () => {
   const [query, setQuery] = useState("");
   const [pokemon, setPokemon] = useState(null);
   const [focused, setFocused] = useState(false);
   const [allPokemons, setAllPokemons] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
     const getAllPokemons = async () => {
@@ -17,7 +18,7 @@ const AddPokemon = () => {
       setAllPokemons(data.results);
     };
     getAllPokemons();
-  }, [])
+  }, [user])
 
   async function addCurrentPokemon(pokemon) {
     const response = await fetch(pokemon.url)
@@ -27,13 +28,34 @@ const AddPokemon = () => {
   }
 
   const addPokemon = async(pokemon) => {
-    inventoryPokemons.push({
-      id: pokemon.id,
-      name: pokemon.name,
-      base_experience: pokemon.base_experience,
-      types: pokemon.types,
-      weight: pokemon.weight,
-    })
+    
+    if (user){
+      console.log('Adding pokemon to user inventory:', pokemon.id, user.id);
+      const response = await fetch('/api/user-pokemon', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          pokemon_id: pokemon.id,
+          user_id: user.id,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error('Failed to add pokemon to user inventory');
+      }
+    } else {
+      inventoryPokemons.push({
+        id: pokemon.id,
+        name: pokemon.name,
+        base_experience: pokemon.base_experience,
+        types: pokemon.types,
+        weight: pokemon.weight,
+      });
+    }
+
   }
 
   return (
@@ -41,7 +63,6 @@ const AddPokemon = () => {
       <div 
         className="capture-background"
         ></div>
-      <Navbar isHome={false} />
       <div 
           style={{
             display: 'flex',

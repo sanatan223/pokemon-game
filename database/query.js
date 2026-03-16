@@ -22,4 +22,13 @@ async function comparePassword(name, pass){
     return result;
 }
 
-module.exports = { getAllUsers, getUserByName, insertUser, comparePassword }
+async function addPokemonToUser(user_id, poke_id){
+    await pool.query("INSERT INTO user_pokemon (user_id, pokemon_id) VALUES($1, $2);", [user_id, poke_id])
+}
+
+async function getUserPokemon(user_id){
+    const { rows } = await pool.query("SELECT pokemon_id FROM user_pokemon WHERE user_id = $1;", [user_id]);
+    return rows;
+}
+
+module.exports = { getAllUsers, getUserByName, insertUser, comparePassword, addPokemonToUser, getUserPokemon }

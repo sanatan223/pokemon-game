@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import '../../styles/Login.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
+import Popup from '../components/Popup';
 
 const AuthPage = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useAuth();
 
@@ -21,26 +23,28 @@ const AuthPage = (props) => {
   }
 
   const validateCred = async (username, password) => {
-    const error = {};
+    const error = [];
 
     const userRegex = /^[a-zA-Z0-9_-]{3,20}$/;
     if (!userRegex.test(username) || username.length < 3) {
-      error.username = "Username must be 3-20 characters (letters, numbers, _ or - only).";
+      error.push("Username must be 3-20 characters (letters, numbers, _ or - only).");
     }
 
     const passRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,}$/;
     if (!passRegex.test(password) || password.length < 8) {
-      error.password = "Password must be at least 8 characters and include a Capital letter and a number.";
+      error.push("Password must be at least 8 characters and include a Capital letter and a number.");
     }
-    setErrors(error);
 
     return error;
   };
 
   const handleLogin = async (username, password) => {
+    setLoading(true);
     const error = await validateCred(username, password);
-    if (Object.keys(error).length > 0){
-      console.log("Validation errors:", error);
+    if (error.length > 0){
+      console.log("validation error", error[0]);
+      setError(`Validation errors: ${error.join('\n')}`);
+      setLoading(false);
       return;
     }
     const data = { username: username, password: password };
@@ -52,21 +56,28 @@ const AuthPage = (props) => {
       },
       body: JSON.stringify(data),
     });
+    const responseData = await response.json();
     
-    console.log(response);
-    if (response.ok) {
+    if (responseData.success) {
       console.log("user logged in", response.statusText);
-      setUser(username);
+      console.log(responseData.user)
+      setError(null);
+      setUser(responseData.user);
+      setLoading(false);
       navigate('/');
     } else {
-      console.error('Failed to log user');
+      const errorData = await response.json();
+      setError(errorData.message || "Login failed.");
+      setLoading(false);
     }
   };
 
   const handleSubmit = async (username, password) => {
+    setLoading(true);
     const error = await validateCred(username, password);
-    if (Object.keys(error).length > 0){
-      console.log("Validation errors:", error);
+    if (error.length > 0){
+      setError("Validation errors:", error);
+      setLoading(false);
       return;
     }
     const data = { username: username, password: password };
@@ -81,14 +92,19 @@ const AuthPage = (props) => {
     console.log(response);
     if (response.ok) {
       console.log("user created", response.statusText);
+      setError(null);
       handleLogin(username, password);
     } else {
-      console.error('Failed to create user');
+      setError(response.statusText || "Signup failed.");
+      setLoading(false);
     }
   };
 
   return (
     <div className="login-background">
+      {error &&
+        <Popup message={error} type={'error'} onClose={() => {setError(null)}}/>
+      }
       <div className="login-card">
         <div className="logo-placeholder">
           <img className='logo-img' src="/logo.png" alt="logo" />
@@ -107,7 +123,10 @@ const AuthPage = (props) => {
           <input type="text" onChange={handlePasswordChange} placeholder="Pikachu@123" />
         </div>
         <button className="login-btn" onClick={() => {props.site == 'signup'? handleSubmit(username, password) : handleLogin(username, password)}} >
-          {props.site === 'signup' ? "Create Account" : "Login"}
+          {loading?
+            "Processing..." : props.site === 'signup' ? "Create Account" : "Login"
+          }
+          
         </button>
         <button className='register-btn' onClick={() => { navigate(props.site === 'signup'? '/login' : '/signup') }}>
           {props.site === 'signup'? "Login to existing Account" : "Start new container"}

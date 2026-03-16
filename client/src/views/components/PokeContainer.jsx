@@ -2,13 +2,49 @@ import Pokecard from './Pokecard'
 import '../../styles/pokeContainer.css'
 import inventoryPokemons from '../../../database/pokemons'
 import { useEffect, useState } from 'react'
+import { useAuth } from '../../context/UserContext';
 
 function PokeContainer() {
   const [pokemons, setPokemons] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
-    setPokemons(inventoryPokemons);
-  }, [])
+    let cancelled = false;
+
+    async function fetchUserPokemons() {
+      if (!user) {
+        setPokemons(inventoryPokemons);
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/user-pokemon/${user.id}`);
+        const data = await response.json();
+
+        const pokeList = await Promise.all(
+          data.map((pokemon) =>
+            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon_id}/`)
+              .then((res) => res.json())
+          )
+        );
+
+        if (!cancelled) {
+          setPokemons(pokeList);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          console.error(err);
+        }
+      }
+      console.log('Fetched pokemons for user:', pokemons);
+    }
+
+    fetchUserPokemons();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
 
   return (
     <>

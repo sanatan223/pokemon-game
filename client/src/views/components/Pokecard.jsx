@@ -27,7 +27,7 @@ function Pokecard(props){
     
     useEffect(() => {
         const getHabitat = async() => {
-            const habitatData = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${props.name}/`)
+            await fetch(`https://pokeapi.co/api/v2/pokemon-species/${props.name}/`)
             .then(res => res.json())
             .then(data => setHabitat(data.habitat?.name ?? "forest"))
         }

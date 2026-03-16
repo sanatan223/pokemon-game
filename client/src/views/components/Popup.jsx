@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/Popup.css';
 
-const Popup = ({ message, duration = 3000, onClose }) => {
+const Popup = ({ message, type='success', duration = 5000, onClose }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Popup = ({ message, duration = 3000, onClose }) => {
 
   return (
     <div className="popup">
-      <div className="popup-content">
+      <div className="popup-content" style={{backgroundColor: type == 'error'? 'red' : 'green'}}>
         {message}
       </div>
     </div>
