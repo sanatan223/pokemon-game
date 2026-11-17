@@ -1,6 +1,11 @@
-const express = require('express');
-const { addPokemonToUser, getUserPokemon } = require('../database/query');
+import express from 'express';
+import { addPokemonToUser, getUserPokemon } from '../database/query.js';
+import { ensureAuthenticated } from '../middleware/authMiddleware.js';
+
 const userPokemonRouter = express.Router();
+
+
+userPokemonRouter.use(ensureAuthenticated);
 
 userPokemonRouter.get('/:id', async (req, res) => {
     try {
@@ -24,4 +29,4 @@ userPokemonRouter.post('/', async (req, res) => {
     }
 });
 
-module.exports = userPokemonRouter;
+export { userPokemonRouter };

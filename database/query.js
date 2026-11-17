@@ -1,5 +1,5 @@
-const pool = require('./pool');
-const bcrypt = require('bcryptjs');
+import { pool } from './pool.js';
+import bcrypt from 'bcryptjs';
 
 async function getAllUsers(){
     const user = await pool.query("SELECT * FROM users;")
@@ -31,4 +31,11 @@ async function getUserPokemon(user_id){
     return rows;
 }
 
-module.exports = { getAllUsers, getUserByName, insertUser, comparePassword, addPokemonToUser, getUserPokemon }
+export {
+  getAllUsers,
+  getUserByName,
+  insertUser,
+  comparePassword,
+  addPokemonToUser,
+  getUserPokemon
+};

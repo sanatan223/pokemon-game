@@ -1,8 +1,8 @@
-const express = require('express');
-const { getAllUsers } = require('../database/query');
+import express from 'express';
+import { getAllUsers, insertUser } from '../database/query.js';
+import { body, validationResult } from 'express-validator';
+
 const signupRouter = express.Router();
-const { insertUser } = require('../database/query');
-const { body, validationResult } = require('express-validator');
 
 signupRouter.post('/', [
     body('username')
@@ -31,4 +31,4 @@ signupRouter.post('/', [
     res.status(200).send("user created");
 })
 
-module.exports = signupRouter;
+export { signupRouter };

@@ -1,5 +1,7 @@
-const express = require('express');
+import express from 'express';
 const logoutRouter = express.Router();
+
+logoutRouter.use(express.urlencoded({ extended: false }));
 
 logoutRouter.post('/', (req, res) => {
   req.logout((err) => {
@@ -10,4 +12,4 @@ logoutRouter.post('/', (req, res) => {
   });
 });
 
-module.exports = logoutRouter;
+export { logoutRouter };

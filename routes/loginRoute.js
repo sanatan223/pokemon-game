@@ -1,11 +1,10 @@
-const session = require("express-session");
-const passport = require("passport");
-const LocalStrategy = require('passport-local').Strategy;
-const express = require('express');
+import passport from 'passport';
+import LocalStrategy from 'passport-local';
+import express from 'express';
+import { pool } from '../database/pool.js';
+import { getUserByName, comparePassword } from '../database/query.js';
+
 const loginRouter = express.Router();
-const pool = require('../database/pool');
-const bcrypt = require('bcryptjs');
-const { getUserByName, insertUser, comparePassword } = require('../database/query');
 
 loginRouter.use(express.urlencoded({ extended: false }));
 
@@ -70,5 +69,4 @@ loginRouter.post('/', (req, res, next) => {
   })(req, res, next);
 })
 
-module.exports = loginRouter;
-
+export { loginRouter };

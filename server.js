@@ -1,14 +1,21 @@
-const express = require('express');
-const path = require('path');
-const cors = require('cors');
-const signupRouter = require('./routes/signupRoute');
-const loginRouter = require('./routes/loginRoute');
-const authRouter = require('./routes/authRoute');
-const logoutRouter = require('./routes/logoutRoute');
-const userPokemonRouter = require('./routes/userPokemonRoute');
-const session = require('express-session');
-const passport = require('passport');
+import express from 'express';
+import path from 'path';
+import cors from 'cors';
+import { signupRouter } from './routes/signupRoute.js';
+import { loginRouter } from './routes/loginRoute.js';
+import { authRouter } from './routes/authRoute.js';
+import { logoutRouter } from './routes/logoutRoute.js';
+import { userPokemonRouter } from './routes/userPokemonRoute.js';
+import session from 'express-session';
+import passport from 'passport';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+
+dotenv.config();
+
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(cors({
   origin: "http://localhost:5173",
@@ -20,7 +27,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client/dist')));
 app.use(express.json()); 
 app.use(session({
-  secret: 'cats',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {

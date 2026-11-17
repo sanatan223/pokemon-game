@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const authRouter = express.Router();
 
 authRouter.get('/', (req, res) => {
@@ -9,4 +9,4 @@ authRouter.get('/', (req, res) => {
   }
 });
 
-module.exports = authRouter;
+export { authRouter };
